@@ -13,11 +13,11 @@
             justify-content: center; 
             background-color: #ffdeef; 
             font-family: sans-serif; 
-            overflow: hidden; /* Prevents scrolling if button moves */
+            overflow: hidden; 
         }
         .container { text-align: center; width: 100%; }
-        img { width: 200px; border-radius: 20px; margin-bottom: 20px; }
-        h1 { color: #d63384; font-size: 24px; }
+        img { width: 230px; height: 230px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; border: 5px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #d63384; font-size: 24px; padding: 0 10px; }
         .btn-wrapper { 
             display: flex; 
             justify-content: center; 
@@ -31,23 +31,26 @@
             border-radius: 10px; 
             border: none; 
             cursor: pointer; 
+            font-weight: bold;
         }
         #yesBtn { background-color: #4CAF50; color: white; }
         #noBtn { 
-            <img id="display-image" src="https://drive.google.com/file/d/1m4EkpohzlZ4XROjho2xd5cb7apGDb004/view?usp=sharing"> 
+            background-color: #f44336; 
             color: white; 
-            position: fixed; /* Keeps it relative to the screen, not the box */
+            position: fixed; 
             transition: 0.1s;
+            z-index: 999;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img id="display-image" src="https://drive.google.com/file/d/1s-SgvWezPjuDYg-ad4mt9ZD1D3kCjD2Y/view?usp=sharing">
+        <img id="display-image" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Zic3R4Ynkwdm5icHBoY3R4Ynkwdm5icHBoY3R4Ynkwdm5icHBoJnBlPWE/m85VvxrLhM2O5mYSuI/giphy.gif">
+        
         <h1 id="main-text">Will you be my Valentine?</h1>
         <div class="btn-wrapper">
             <button id="yesBtn">Yes</button>
-            <button id="noBtn">No</button>
+            <button id="noBtn" style="position: static;">No</button>
         </div>
     </div>
 
@@ -57,20 +60,13 @@
         const mainText = document.getElementById('main-text');
         const img = document.getElementById('display-image');
 
-        // Set initial position of No button
-        window.onload = () => {
-            const rect = noBtn.getBoundingClientRect();
-            noBtn.style.left = rect.left + "px";
-            noBtn.style.top = rect.top + "px";
-        };
-
+        // Logic to make the button move
         function moveButton() {
-            // Calculate screen boundaries with a 50px safety margin
+            noBtn.style.position = 'fixed'; // Changes from static to fixed on first move
             const padding = 50;
             const maxWidth = window.innerWidth - noBtn.offsetWidth - padding;
             const maxHeight = window.innerHeight - noBtn.offsetHeight - padding;
 
-            // Generate random coordinates within the safe zone
             const randomX = Math.max(padding, Math.floor(Math.random() * maxWidth));
             const randomY = Math.max(padding, Math.floor(Math.random() * maxHeight));
 
@@ -78,16 +74,16 @@
             noBtn.style.top = randomY + "px";
         }
 
-        // Move on both hover (PC) and touch (Mobile)
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Stops the click from happening
+            e.preventDefault();
             moveButton();
         });
 
         yesBtn.addEventListener('click', () => {
             mainText.innerHTML = "YAY!!! See you then! ❤️";
-            img.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreWp6ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0Jm/l41lTfuxV5c490YBG/giphy.gif";
+            // SECOND GIF (The Success)
+            img.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2Zic3R4Ynkwdm5icHBoY3R4Ynkwdm5icHBoY3R4Ynkwdm5icHBoJnBlPWE/I97pTogbE5f8yY03uC/giphy.gif";
             noBtn.style.display = 'none';
         });
     </script>
