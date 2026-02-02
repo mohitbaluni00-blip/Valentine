@@ -52,6 +52,17 @@
             img.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJreWp6ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0ZzR0Jm/l41lTfuxV5c490YBG/giphy.gif";
             noBtn.style.display = 'none';
         });
-    </script>
+    </function moveButton() {
+    // This calculates a safe area so the button doesn't go off-screen
+    const padding = 50;
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+    
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+}>
 </body>
 </html>
